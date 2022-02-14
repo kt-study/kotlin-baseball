@@ -22,6 +22,7 @@ dependencies {
 
     // test
     testImplementation("io.kotest:kotest-runner-junit5:4.6.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
