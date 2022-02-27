@@ -26,7 +26,7 @@ internal class BaseballTest : StringSpec({
             shouldThrowExactly { Baseball(-1) },
             shouldThrowExactly { Baseball(-9) }
         ).forEach {
-            it.message shouldEndWith "1~9 사이의 수가 아닙니다."
+            it.message shouldEndWith "${Baseball.MIN_NUMBER}~${Baseball.MAX_NUMBER} 사이의 수가 아닙니다."
         }
     }
 })
