@@ -1,11 +1,12 @@
 package com.kotlinbaseball
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.kotlinbaseball.domain.BaseballGame
 
-@SpringBootApplication
 class KotlinBaseballApplication
 
 fun main(args: Array<String>) {
-    runApplication<KotlinBaseballApplication>(*args)
+    do {
+        val baseballGame = BaseballGame()
+        baseballGame.play()
+    } while (baseballGame.playerWantNewGame())
 }
