@@ -1,32 +1,32 @@
 package com.kotlinbaseball.domain
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
+import io.kotest.matchers.ints.shouldBeLessThanOrEqual
+import io.kotest.matchers.string.shouldEndWith
 
-internal class BaseballTest : StringSpec() {
+internal class BaseballTest : StringSpec({
 
-    @DisplayName("Baseball의 값이 1에서 9 사이면 정상적으로 생성된다.")
-    @ParameterizedTest
-    @CsvSource("1", "3", "5", "9")
-    fun validRangeValue(input: Int) {
-        // when
-        val baseball = Baseball(input)
-
-        // then
-        assertThat(baseball.number).isEqualTo(input)
-    }
-
-    @DisplayName("Baseball의 값이 1보다 작거나 9보다 크면 예외가 발생한다.")
-    @ParameterizedTest
-    @CsvSource("0", "10", "-1", "-9")
-    fun invalidRangeValueException(input: Int) {
-        // when, then
-        assertThrows<IllegalArgumentException> {
-            Baseball(input)
+    "Baseball의 값이 1에서 9 사이면 정상적으로 생성된다." {
+        listOf(
+            Baseball(1),
+            Baseball(5),
+            Baseball(9)
+        ).forEach {
+            it.number shouldBeGreaterThanOrEqual 1
+            it.number shouldBeLessThanOrEqual 9
         }
     }
-}
+
+    "Baseball의 값이 1보다 작거나 9보다 크면 예외가 발생한다." {
+        listOf<IllegalArgumentException>(
+            shouldThrowExactly { Baseball(0) },
+            shouldThrowExactly { Baseball(10) },
+            shouldThrowExactly { Baseball(-1) },
+            shouldThrowExactly { Baseball(-9) }
+        ).forEach {
+            it.message shouldEndWith "1~9 사이의 수가 아닙니다."
+        }
+    }
+})
