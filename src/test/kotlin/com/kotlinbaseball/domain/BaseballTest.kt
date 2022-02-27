@@ -14,8 +14,8 @@ internal class BaseballTest : StringSpec({
             Baseball(5),
             Baseball(9)
         ).forEach {
-            it.number shouldBeGreaterThanOrEqual 1
-            it.number shouldBeLessThanOrEqual 9
+            it.value shouldBeGreaterThanOrEqual 1
+            it.value shouldBeLessThanOrEqual 9
         }
     }
 

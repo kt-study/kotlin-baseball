@@ -1,11 +1,11 @@
 package com.kotlinbaseball.domain
 
 data class Baseball(
-    val number: Int
+    val value: Int
 ) {
 
     init {
-        validateNegative(number)
+        validateNegative(value)
     }
 
     private fun validateNegative(number: Int) {
