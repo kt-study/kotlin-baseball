@@ -5,6 +5,34 @@ import kotlin.random.Random
 class Baseballs private constructor(
     val values: Set<Baseball>
 ) {
+    fun compare(otherBaseballs: Baseballs): BaseballGameScore {
+        val baseballGameScore = BaseballGameScore()
+
+        for (i: Int in values.indices) {
+            val baseball = values.elementAt(i)
+            val otherBaseball = otherBaseballs.values.elementAt(i)
+
+            compareBallAndStrike(baseball, otherBaseball, otherBaseballs, baseballGameScore)
+        }
+
+        return baseballGameScore
+    }
+
+    private fun compareBallAndStrike(
+        baseball: Baseball,
+        otherBaseball: Baseball,
+        otherBaseballs: Baseballs,
+        baseballGameScore: BaseballGameScore
+    ) {
+        if (baseball == otherBaseball) {
+            baseballGameScore.increaseStrike()
+            return
+        }
+
+        if (otherBaseballs.values.contains(baseball)) {
+            baseballGameScore.increaseBall()
+        }
+    }
 
     companion object {
         const val BALL_COUNT: Int = 3

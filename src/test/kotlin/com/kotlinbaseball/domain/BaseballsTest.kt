@@ -60,4 +60,30 @@ internal class BaseballsTest : StringSpec({
         // then
         duplicateException.message shouldBe "중복된 숫자가 입력되었습니다."
     }
+
+    "사용자의 input값과 비교했을 때 일치하는 숫자가 포함된 경우 볼 개수가 증가한다." {
+        // given
+        val computerBaseballs = Baseballs.from("123")
+        val playerBaseballs = Baseballs.from("912")
+
+        // when
+        val score = computerBaseballs.compare(playerBaseballs)
+
+        // then
+        score.getBallCount() shouldBe 2
+        score.getStrikeCount() shouldBe 0
+    }
+
+    "사용자의 input값과 비교했을 때 숫자와 위치까지 올바를 경우 스트라이크 개수가 증가한다." {
+        // given
+        val computerBaseballs = Baseballs.from("123")
+        val playerBaseballs = Baseballs.from("129")
+
+        // when
+        val score = computerBaseballs.compare(playerBaseballs)
+
+        // then
+        score.getBallCount() shouldBe 0
+        score.getStrikeCount() shouldBe 2
+    }
 })
